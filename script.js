@@ -207,7 +207,7 @@ console.table(result);
 //If possible points are 0, you cannot divide by 0. What if the value that you are expecting to be a number is instead a string?
 
 function getLearnerData(course, ag, submissions) {
-  const result = [];
+  const reportCard = [];
   const now = new Date();
 
   // Validate course match
@@ -251,7 +251,7 @@ function getLearnerData(course, ag, submissions) {
     const dueAt = new Date(assignment.due_at);
     let isLate = false;
 
-    //Redundant check
+    //Double check
     if (submittedAt > dueAt || submittedAt.getTime() > dueAt.getTime()) {
       isLate = true;
     }
@@ -261,12 +261,12 @@ function getLearnerData(course, ag, submissions) {
       score -= 10;
     }
 
-    // Allow score to exceed the max
+    // Allow score to exceed max
     score = Math.min(score, pointsPossible + 3);
 
     const percent = +(score / pointsPossible).toFixed(2);
 
-    //Skip zero scores
+    
     if (percent === 0) return;
 
     learners[learner_id].scores[assignment_id] = percent;
@@ -282,16 +282,16 @@ function getLearnerData(course, ag, submissions) {
       output[aid] = learner.scores[aid];
     }
 
-    // Round total before dividing
+
     const roundedTotal = Math.round(learner.totalScore);
     const roundedPossible = Math.round(learner.totalPossible);
     output.avg = +(roundedTotal / roundedPossible).toFixed(3);
 
-    result.push(output);
+    reportCard.push(output);
   }
 
-  return result;
+  return reportCard;
 }
 
-const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+let reportCard = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 console.table(result);
