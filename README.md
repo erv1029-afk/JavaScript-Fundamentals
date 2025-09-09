@@ -16,21 +16,14 @@ This project generates learner report cards based on assignment submissions. It�
 
 📊 Sample Output
 
-```js
-[
-  {
-    id: 101,
-    "a1": 0.85,
-    "a2": 0.95,
-    avg: 0.90
-  },
-  {
-    id: 102,
-    "a1": 0.78,
-    avg: 0.78
+{
+  learner_id: 101,
+  assignment_id: "a1",
+  submission: {
+    score: 85,
+    submitted_at: "2025-08-31T20:00:00Z"
   }
-]
-```
+}
 
 🛠️ How It Works
 
@@ -38,6 +31,4 @@ The core function is `getLearnerData(course, assignmentGroup, submissions)`. It 
 
 🎨 Design Philosophy
 
-This isn’t a rigid grading engine. It’s expressive, flexible, and built to reflect effort and timing. Slight inconsistencies are okay — they make the system feel more human. The logic is modular and easy to tweak if you want to adjust penalties, bonuses, or rounding behavior.
-
-
+This grading logic was designed with clarity and practicality in mind. It reflects a realistic approach to evaluating learner submissions, incorporating timing, effort, and score adjustments where appropriate. The structure is readable and modular, making it easy to revisit or refine as needed. Every decision — from how scores are calculated to how averages are rounded — was made to align with the assignment’s goals and the data available at the time.
